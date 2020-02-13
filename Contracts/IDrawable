@@ -1,0 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace mmLogo.Contracts
+{
+    public interface IDrawable
+    {
+        public string Draw(int size);
+    }
+}
