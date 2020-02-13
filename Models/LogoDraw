@@ -1,0 +1,126 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using mmLogo.Contracts;
+
+namespace mmLogo.Models
+{
+    public class LogoDraw : IDrawable
+    {
+
+        public string Draw(int size)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(PrintTopPart(size));
+            sb.Append(PrintBottomPart(size));
+
+            return sb.ToString().TrimEnd();
+        }
+        private static string PrintTopPart(int input)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            int numOfBuildingSymbols = input;
+            int numOfSeparators = input;
+            int numOfMidSeparators = numOfSeparators;
+            int numOfLastSeparators = numOfSeparators;
+            int secondPartBuildingSymbols = numOfBuildingSymbols;
+
+            int rows = input + 1;
+            int topRows = rows / 2;
+
+            string lineToAppend = "";
+
+            for (int row = 0; row < topRows; row++)
+            {
+
+                for (int t = numOfSeparators; t > 0; t--)
+                {
+                    lineToAppend += Resources.Resources.Seperator;
+                }
+                numOfSeparators -= 1;
+                for (int y = numOfBuildingSymbols; y > 0; y--)
+                {
+                    lineToAppend += Resources.Resources.BuildingBlock;
+                }
+                numOfBuildingSymbols += 2;
+                for (int g = numOfMidSeparators; g > 0; g--)
+                {
+                    lineToAppend += Resources.Resources.Seperator;
+                }
+                numOfMidSeparators -= 2;
+
+                for (int i = secondPartBuildingSymbols; i > 0; i--)
+                {
+                    lineToAppend += Resources.Resources.BuildingBlock;
+                }
+                secondPartBuildingSymbols += 2;
+                for (int z = numOfLastSeparators; z > 0; z--)
+                {
+                    lineToAppend += Resources.Resources.Seperator;
+                }
+                numOfLastSeparators -= 1;
+
+                stringBuilder.AppendLine(lineToAppend + lineToAppend);
+                lineToAppend = "";
+            }
+            return stringBuilder.ToString();
+        }
+
+        private static string PrintBottomPart(int input)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            int numOfBuildingSymbols = input;
+            int numOfSeparators = input / 2;
+            int numOfMidSeparators = 1;
+            int numOfSecondMidSeparators = 1;
+            int numOfLastSeparators = input / 2;
+            int numOfMidSymbols = (input * 2) - 1;
+
+            int rows = input + 1;
+            int bottomRows = rows / 2;
+
+            string lineToAppend = "";
+            for (int row = 0; row < bottomRows; row++)
+            {
+                for (int t = numOfSeparators; t > 0; t--)
+                {
+                    lineToAppend += Resources.Resources.Seperator;
+                }
+                numOfSeparators--;
+                for (int y = numOfBuildingSymbols; y > 0; y--)
+                {
+                    lineToAppend += Resources.Resources.BuildingBlock;
+                }
+                for (int i = numOfMidSeparators; i > 0; i--)
+                {
+                    lineToAppend += Resources.Resources.Seperator;
+                }
+                numOfMidSeparators += 2;
+                for (int g = numOfMidSymbols; g > 0; g--)
+                {
+                    lineToAppend += Resources.Resources.BuildingBlock;
+                }
+                numOfMidSymbols -= 2;
+                for (int z = numOfSecondMidSeparators; z > 0; z--)
+                {
+                    lineToAppend += Resources.Resources.Seperator;
+                }
+                numOfSecondMidSeparators += 2;
+                for (int y = numOfBuildingSymbols; y > 0; y--)
+                {
+                    lineToAppend += Resources.Resources.BuildingBlock;
+                }
+                for (int t = numOfLastSeparators; t > 0; t--)
+                {
+                    lineToAppend += Resources.Resources.Seperator;
+                }
+                numOfLastSeparators--;
+                stringBuilder.AppendLine(lineToAppend + lineToAppend);
+                lineToAppend = "";
+            }
+            return stringBuilder.ToString();
+        }
+    }
+}
